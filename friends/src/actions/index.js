@@ -60,3 +60,14 @@ export const deleteFriend = id => dispatch => {
     })
     .catch(err => console.log(err));
  }
+
+ export const UPDATE_FRIEND= 'UPDATE_FRIEND';
+
+export const updateFriend = (id, newFriend) => dispatch => {
+    axiosWithAuth()
+    .put(`http://localhost:5000/api/friends/${id}`, newFriend)
+    .then(res => {
+        dispatch({ type: UPDATE_FRIEND, payload: res.data})
+    })
+    .catch(err => console.log(err));
+ }

@@ -6,7 +6,8 @@ import {
     FETCH_DATA_SUCCESS,
     FETCH_DATA_FAILURE,
     ADD_FRIEND,
-    DELETE_FRIEND
+    DELETE_FRIEND,
+    UPDATE_FRIEND
 } from '../actions';
 
 const initialState = {
@@ -55,6 +56,11 @@ const reducer = (state= initialState, action) => {
                 friends: action.payload
             }
             case DELETE_FRIEND:
+            return{
+                ...state,
+                friends: action.payload
+            }
+            case UPDATE_FRIEND:
             return{
                 ...state,
                 friends: action.payload

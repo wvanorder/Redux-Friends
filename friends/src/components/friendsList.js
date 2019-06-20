@@ -4,7 +4,7 @@ import moment from 'moment';
 import Loader from 'react-loader-spinner';
 import { withRouter } from  'react-router-dom';
 
-import { fetchData, addFriend, deleteFriend } from '../actions';
+import { fetchData, addFriend, deleteFriend, updateFriend } from '../actions';
 
 class FriendsList extends React.Component {
     constructor() {
@@ -33,10 +33,28 @@ class FriendsList extends React.Component {
 
     addFriend = e => {
         this.props.addFriend(this.state.newFriend);
+        this.setState({
+            newFriend: {
+                name: '',
+                age: '',
+                email: ''
+            }
+        })
     }
 
     deleteFriend = id => {
         this.props.deleteFriend(id);
+    }
+
+    updateFriend = (id, newFriend) => {
+        this.props.updateFriend(id, newFriend);
+        this.setState({
+            newFriend: {
+                name: '',
+                age: '',
+                email: ''
+            }
+        })
     }
 
     
@@ -47,6 +65,7 @@ class FriendsList extends React.Component {
                     return (<div>
                                 <h1>{friend.name}</h1>
                                 <button onClick={() => this.deleteFriend(friend.id)}>Delete</button>
+                                <button onClick={() => this.updateFriend(friend.id, this.state.newFriend)}>Update</button>
                             </div>
                     )
               })}
@@ -95,6 +114,6 @@ const mapStateToProps = state => {
 export default withRouter(
     connect(
         mapStateToProps,
-        { fetchData, addFriend, deleteFriend }
+        { fetchData, addFriend, deleteFriend, updateFriend }
     )(FriendsList)
 );
